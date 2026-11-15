@@ -14,7 +14,191 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      luts: {
+        Row: {
+          created_at: string
+          cube_data: string | null
+          description: string
+          id: string
+          name: string
+          preview_gradient: string
+        }
+        Insert: {
+          created_at?: string
+          cube_data?: string | null
+          description?: string
+          id?: string
+          name: string
+          preview_gradient?: string
+        }
+        Update: {
+          created_at?: string
+          cube_data?: string | null
+          description?: string
+          id?: string
+          name?: string
+          preview_gradient?: string
+        }
+        Relationships: []
+      }
+      projects: {
+        Row: {
+          config: Json
+          created_at: string
+          downloaded_at: string | null
+          duration_seconds: number
+          final_url: string | null
+          hermes_job_id: string | null
+          id: string
+          preview_url: string | null
+          progress: number
+          status: string
+          thumbnail_url: string | null
+          title: string
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          config?: Json
+          created_at?: string
+          downloaded_at?: string | null
+          duration_seconds?: number
+          final_url?: string | null
+          hermes_job_id?: string | null
+          id?: string
+          preview_url?: string | null
+          progress?: number
+          status?: string
+          thumbnail_url?: string | null
+          title: string
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          config?: Json
+          created_at?: string
+          downloaded_at?: string | null
+          duration_seconds?: number
+          final_url?: string | null
+          hermes_job_id?: string | null
+          id?: string
+          preview_url?: string | null
+          progress?: number
+          status?: string
+          thumbnail_url?: string | null
+          title?: string
+          updated_at?: string
+          version?: number
+        }
+        Relationships: []
+      }
+      segment_comments: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          project_id: string
+          segment_id: string
+          sent: boolean
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          project_id: string
+          segment_id: string
+          sent?: boolean
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          project_id?: string
+          segment_id?: string
+          sent?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "segment_comments_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "segment_comments_segment_id_fkey"
+            columns: ["segment_id"]
+            isOneToOne: false
+            referencedRelation: "segments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      segments: {
+        Row: {
+          created_at: string
+          end_seconds: number
+          id: string
+          label: string
+          project_id: string
+          start_seconds: number
+        }
+        Insert: {
+          created_at?: string
+          end_seconds: number
+          id?: string
+          label: string
+          project_id: string
+          start_seconds: number
+        }
+        Update: {
+          created_at?: string
+          end_seconds?: number
+          id?: string
+          label?: string
+          project_id?: string
+          start_seconds?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "segments_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      templates: {
+        Row: {
+          created_at: string
+          description: string
+          duration_seconds: number
+          edit_style: string
+          id: string
+          lut_id: string | null
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string
+          duration_seconds?: number
+          edit_style?: string
+          id?: string
+          lut_id?: string | null
+          name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          duration_seconds?: number
+          edit_style?: string
+          id?: string
+          lut_id?: string | null
+          name?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
