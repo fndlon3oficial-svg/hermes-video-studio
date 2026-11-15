@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- All Hermes (Google Cloud engine) calls go through `src/lib/hermes.functions.ts`; it falls back to simulated mode when `HERMES_BASE_URL` is unset, so the UI works before the engine is wired.
+- Video/audio files never touch Lovable Cloud: they upload straight to Google Cloud via signed URLs from Hermes. Cloud only stores projects, segments, comments, templates and LUTs.
+- No final render via GitHub Actions: Hermes produces the final file (`/finalize`).
+- Tables use open anon RLS policies (single-user tool, no login yet); add auth before sharing with a team.
