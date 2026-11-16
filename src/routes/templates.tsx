@@ -26,16 +26,16 @@ function Templates() {
   const [lutName, setLutName] = useState("");
 
   const addTemplate = async () => {
-    if (!t.name.trim()) return toast.error("Dê um nome ao template");
+    if (!t.name.trim()) { toast.error("Dê um nome ao template"); return; }
     const { error } = await supabase.from("templates").insert({ ...t, name: t.name.trim(), lut_id: t.lut_id || null });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setT({ ...t, name: "", description: "" }); qc.invalidateQueries({ queryKey: ["templates"] });
   };
   const addLut = async (file: File) => {
-    if (file.size > 5_000_000) return toast.error("Arquivo .cube muito grande (máx 5MB)");
+    if (file.size > 5_000_000) { toast.error("Arquivo .cube muito grande (máx 5MB)"); return; }
     const cube = await file.text();
     const { error } = await supabase.from("luts").insert({ name: lutName.trim() || file.name.replace(/\.cube$/i, ""), description: "LUT personalizado", cube_data: cube });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setLutName(""); qc.invalidateQueries({ queryKey: ["luts"] }); toast.success("LUT adicionado");
   };
   const del = async (table: "templates" | "luts", id: string) => { await supabase.from(table).delete().eq("id", id); qc.invalidateQueries({ queryKey: [table] }); };
