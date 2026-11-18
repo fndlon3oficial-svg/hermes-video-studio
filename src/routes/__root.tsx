@@ -108,7 +108,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  if (import.meta.env.VITE_GITHUB_PAGES) return <><HeadContent />{children}</>;
+  if (import.meta.env['VITE_GITHUB_PAGES']) return <><HeadContent />{children}</>;
   return (
     <html lang="pt-BR">
       <head>

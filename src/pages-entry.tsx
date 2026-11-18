@@ -5,5 +5,5 @@ import { getRouter } from "./router";
 const element = document.getElementById("root");
 if (!element) throw new Error("Não foi possível abrir o editor.");
 const router = getRouter();
-router.update({ history: createHashHistory() });
+router.update({ history: createHashHistory(), context: router.options.context });
 createRoot(element).render(<StrictMode><RouterProvider router={router} /></StrictMode>);
