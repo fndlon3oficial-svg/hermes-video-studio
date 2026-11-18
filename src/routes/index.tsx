@@ -12,6 +12,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Seus vídeos editados por IA: em revisão, prontos e baixados." },
       { property: "og:title", content: "Meus Projetos — FNL_Edição" },
       { property: "og:description", content: "Seus vídeos editados por IA: em revisão, prontos e baixados." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Index,

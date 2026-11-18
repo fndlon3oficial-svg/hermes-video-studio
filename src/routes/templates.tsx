@@ -13,6 +13,8 @@ export const Route = createFileRoute("/templates")({
       { name: "description", content: "Gerencie templates de edição e LUTs de color grading." },
       { property: "og:title", content: "Biblioteca de Templates — FNL_Edição" },
       { property: "og:description", content: "Gerencie templates de edição e LUTs de color grading." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Templates,

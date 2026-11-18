@@ -10,6 +10,8 @@ export const Route = createFileRoute("/download/$id")({
       { name: "description", content: "Seu vídeo está pronto para baixar." },
       { property: "og:title", content: "Exportação concluída — FNL_Edição" },
       { property: "og:description", content: "Seu vídeo está pronto para baixar." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: DownloadPage,

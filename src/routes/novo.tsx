@@ -5,7 +5,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Check, Film, Music, Upload, Sparkles, Loader2, X, Clapperboard } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { createJob, signUpload } from "@/lib/hermes.functions";
+import { createJob, signUpload } from "@/lib/hermes";
 import { EDIT_STYLES, LANGUAGES } from "@/lib/status";
 
 export const Route = createFileRoute("/novo")({
@@ -15,6 +15,8 @@ export const Route = createFileRoute("/novo")({
       { name: "description", content: "Envie seus vídeos, escolha estilo, LUT e legenda, e gere com IA." },
       { property: "og:title", content: "Novo Vídeo IA — FNL_Edição" },
       { property: "og:description", content: "Envie seus vídeos, escolha estilo, LUT e legenda, e gere com IA." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: NewVideo,

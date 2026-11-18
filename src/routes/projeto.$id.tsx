@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { ArrowLeft, Download, Loader2, Send, Sparkles, Trash2, MessageSquare, Rocket } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { finalizeJob, sendCorrections } from "@/lib/hermes.functions";
+import { finalizeJob, sendCorrections } from "@/lib/hermes";
 import { STATUS_LABEL, fmtTime } from "@/lib/status";
 
 export const Route = createFileRoute("/projeto/$id")({
@@ -15,6 +15,8 @@ export const Route = createFileRoute("/projeto/$id")({
       { name: "description", content: "Revise o vídeo gerado, comente cada trecho e envie correções à IA." },
       { property: "og:title", content: "Revisão & Correções — FNL_Edição" },
       { property: "og:description", content: "Revise o vídeo gerado, comente cada trecho e envie correções à IA." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Review,

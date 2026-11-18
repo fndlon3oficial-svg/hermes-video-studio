@@ -34,3 +34,6 @@ use the editor.
 - Video/audio files never touch Lovable Cloud: they upload straight to Google Cloud via signed URLs from Hermes. Cloud only stores projects, segments, comments, templates and LUTs.
 - No final render via GitHub Actions: Hermes produces the final file (`/finalize`).
 - Tables use open anon RLS policies (single-user tool, no login yet); add auth before sharing with a team.
+
+- Routes import Hermes through `src/lib/hermes.ts`; Pages aliases this to `hermes-browser.ts` to avoid server RPCs and keep engine secrets off static hosting.
+- Use the separate Vite Pages configuration with TanStack hash history for GitHub Pages; preserve the normal TanStack Start bootstrap for Lovable preview and SSR hosting.

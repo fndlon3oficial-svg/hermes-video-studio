@@ -51,3 +51,24 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+## GitHub Pages via GitHub Actions
+
+O workflow `.github/workflows/deploy-pages.yml` publica em cada push para `main` e pode ser iniciado em **Actions → Publish GitHub Pages → Run workflow**. Em **Settings → Pages**, selecione **GitHub Actions**. Repositórios privados precisam de um plano do GitHub que permita Pages; não torne o repositório público sem revisar seu conteúdo.
+
+O comando `bun run build:pages` compila a versão estática separada, mantendo o TanStack Start do Lovable. URLs como `/hermes-video-studio/#/novo` permitem atualizar e compartilhar telas. Actions apenas compila/publica a interface; Hermes gera e finaliza vídeos no Google Cloud.
+
+### Gateway do Hermes
+
+Defina **Settings → Secrets and variables → Actions → Variables → HERMES_PUBLIC_URL** com a URL HTTPS pública do gateway no Google Cloud. Não coloque chaves privadas em variáveis `VITE_*`, código ou workflows. Sem essa URL, gerar/finalizar informa a configuração pendente, sem devolver vídeo fictício.
+
+Contratos JSON necessários:
+- `POST /uploads/sign`: recebe `{filename, contentType}`, devolve `{uploadUrl, gcsPath}`. O navegador envia o arquivo via PUT direto ao Google Cloud.
+- `POST /jobs`: recebe `{videos, music, reference, editStyle, templateId, durationSeconds, subtitleLanguage, lut}`.
+- `GET /jobs/:jobId`: consulta o andamento.
+- `POST /jobs/:jobId/corrections`: recebe `{corrections: [{label, start, end, comments}]}`.
+- `POST /jobs/:jobId/finalize`: gera o arquivo final.
+
+Jobs retornam `{jobId, status, progress, previewUrl?, finalUrl?, segments?}`, status `gerando`, `revisao`, `finalizando`, `pronto` ou `erro`, progresso 0–100, segmentos `{label, start, end}` e URLs HTTPS. Permita CORS para a origem exata do site Pages: GET/POST/OPTIONS e Content-Type no gateway; PUT e Content-Type no bucket. A chave do motor fica somente no Google Cloud. O gateway precisa validar pedidos e proteger operações pagas contra abuso; CORS não autentica usuários.
+
+Este editor ainda é uma ferramenta sem login, com acesso aberto aos projetos e comentários pelas políticas existentes. Adicione autenticação e permissões antes de compartilhar com uma equipe ou abrir acesso público aos dados.
