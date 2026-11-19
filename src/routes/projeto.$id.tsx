@@ -1,6 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { ArrowLeft, Download, Loader2, Send, Sparkles, Trash2, MessageSquare, Rocket } from "lucide-react";
@@ -31,8 +30,8 @@ function Review() {
   const [draft, setDraft] = useState("");
   const [working, setWorking] = useState<"" | "corr" | "final">("");
   const [time, setTime] = useState(0);
-  const sendCorr = useServerFn(sendCorrections);
-  const finalize = useServerFn(finalizeJob);
+  const sendCorr = sendCorrections;
+  const finalize = finalizeJob;
 
   const { data, isLoading } = useQuery({
     queryKey: ["project", id],

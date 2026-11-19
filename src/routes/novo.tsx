@@ -1,6 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Check, Film, Music, Upload, Sparkles, Loader2, X, Clapperboard } from "lucide-react";
@@ -27,8 +26,8 @@ const DURATIONS = [15, 30, 60, 90, 180];
 
 function NewVideo() {
   const navigate = useNavigate();
-  const sign = useServerFn(signUpload);
-  const create = useServerFn(createJob);
+  const sign = signUpload;
+  const create = createJob;
   const [step, setStep] = useState(0);
   const [busy, setBusy] = useState(false);
   const [title, setTitle] = useState("");
